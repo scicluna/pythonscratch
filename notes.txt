@@ -57,3 +57,29 @@ variables are scoped inside of the function to which it belongs [like in JS]
 Returns.##########
 Same as JS. Just (return x)
 [python squares note: x**2, pow(x, 2)]
+
+############################
+LOGIC
+############################
+>, >=, <, <=, ==, != [same as js]
+if x < y: [no parenthesis like in js, and instead of {} you use : and indents]
+
+if
+elif [else if in javascript (stop asking new questions if we fufill one)]
+
+if score >= 90 and score <= 100: [and instead of && :::: or instead of ||]
+    thing
+
+[else is default case like in js]
+
+[honestly, all mostly the same as in JS] :::: no ===, just == :::: 
+
+MATCH.############################
+
+match name: [match = switch in js && _ == default && | can be used for or in match && don't need breaks]
+    case "Harry" | "Hermoine" | "Ron:
+        print("Gryffindor")
+    case "Draco":
+        print("Slytherin")
+    case _:
+        print("Default")
