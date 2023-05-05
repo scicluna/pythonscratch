@@ -24,3 +24,15 @@ can even destructure from an array --- first, last = name.split(" ")    [unlike 
 
 Int Methods
 ########################
+int("1") = 1 :::: [basically parseInt()]
++, -, / , *, %
+
+Float Methods
+#######################
+float("1.2") = 1.2 :::: [turns the string into a float if applicable]
+round(float("1.2")) = 1 :::: [Way better than Math.floor()]
+round(float(".3333"), 2) = .33 :::: rounds to 2 decimals
+f"{number:,}" :::: [formats the number with commas]
+f"{number:.2f}" :::: formats the number to 2 decimals
+
+
