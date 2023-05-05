@@ -83,3 +83,57 @@ match name: [match = switch in js && _ == default && | can be used for or in mat
         print("Slytherin")
     case _:
         print("Default")
+
+LOOPS.#############################
+
+i = 3
+while i > 0:
+    print("meow")
+    i -= 1 [no i-- in python]
+
+for i in [1,2,3] (will loop 3 times, one for each item in the "list" aka an array)
+for i in range(3): (will loop 3 times. for i in range is sick)
+
+common in python to use unused variables like so:
+for _ in range(3): 
+
+print("\nmeow" * 3, end='') also meows 3 times 
+
+[(note: indentations mattering is weird)]
+
+while True:
+    n = int(input("What's x"))
+    if n > 0
+        break
+
+LISTS.###################################
+[Lists are like JS arrays]
+Bracket notation like in JS (students[0])
+
+for student in students: [just like in JS, only with the indent syntax]
+    print(student)
+
+for i in range(len(students)): [len instead of .length]
+    print(students[i])
+
+DICTS.#####################################
+Key value pairs like JS objects
+students = {
+    "Hermoine": "Gryffindor, 
+    "Draco": "Slytherin"
+}
+students["Hermione"] = Gryffindor
+
+for student in students:
+    print(student, students[student]) [this will print all of the keys of the dictionary... and then students[student] gets other value very cool]
+
+can do arrays of objects in this too. 
+students = [
+    {"name": "Harry", "house": "Griff", "patronus": "Elk"},
+    {"name": "Draco", "house": "Sylyth", "patronus": None}
+]
+
+for student in students:
+    print(student["name"]) [prints each student's name etc...]
+
+None = null in a dictionary
