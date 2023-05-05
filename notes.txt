@@ -35,4 +35,25 @@ round(float(".3333"), 2) = .33 :::: rounds to 2 decimals
 f"{number:,}" :::: [formats the number with commas]
 f"{number:.2f}" :::: formats the number to 2 decimals
 
+Functions
+#######################
+hello() is a function call
+def :::: is the keyword to define Functions [indents are important - indent below that code is part of that function]
+def hello(): 
+    print("hello")
 
+def hello(name="luke"): [can define default values like in JS. very similar def = function]
+    print(f"hello {name}")
+
+functions must be above the call in the python script.
+
+New Convention.####### now we can define our functions in any order so long as main is the last thing called
+def main():
+    name = input("What's your name? ")
+    hello(name)
+
+variables are scoped inside of the function to which it belongs [like in JS]
+
+Returns.##########
+Same as JS. Just (return x)
+[python squares note: x**2, pow(x, 2)]
