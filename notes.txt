@@ -1,0 +1,26 @@
+Functions/Variables
+######################## docs.python.org
+print("hello, world") -- print = console.log
+input -- prompt, like in inquirer :::: return value is the prompt input [name = input("What's your name?")]
+
+note: (Comments are left with #)
+can leave multilines with """ comments """
+
+template literals :::: f"Hello {variable}" [just add an f before the string and brackets around the variable!]
+
+print('hello,', end=' ') #Can actually edit the end option directly (we only know this via the python docs)
+print('World') #now they print on the same line, cool right? since the default for print ends with \n
+
+Interesting that "end" is just passed in as an argument and not as an option object
+
+String Methods
+#######################
+str = str.strip() removes whitespace from str :::: aka .trim in js
+str = str.capitalize() capitalizes the first letter (pretty cool)
+str = str.title() captializes the first letter of each word
+
+str = str.split(" ") splits it on whitespace into an array [exactly like js]
+can even destructure from an array --- first, last = name.split(" ")    [unlike in js where we do const [first,last] = name.split(" ")]
+
+Int Methods
+########################
