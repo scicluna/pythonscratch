@@ -137,3 +137,46 @@ for student in students:
     print(student["name"]) [prints each student's name etc...]
 
 None = null in a dictionary
+
+EXCEPTIONS.####################################
+
+try-except blocks [pretty much like try/catch blocks in JS]
+ 
+try:
+    x = int(input("what's x? "))
+    print(f"x is {x}")
+except ValueError:  [could use a generic except instead by just doing except: (bad form, though)]
+    print("x is not an integer")    
+
+-----
+try:
+    x = int(input("what's x? "))
+except ValueError:
+    print("x is not an integer")
+
+print(f"x is {x}")
+[this "NameErrors" because... x = int... is invalid if "cat"]
+
+------fix with
+try:
+    x = int(input("what's x? "))
+except ValueError:
+    print("x is not an integer")
+else:
+    print(f"x is {x}")
+    
+[can add else at the end of a try except block as a catchall... but its always called... unless an exception happens...]
+[else only runs if no exceptions]
+
+[while True loop w/ break to get out is cool but same as JS]
+[return also breaks you out of while true loops]
+
+---------pass
+def getInt():
+    while True:
+        try:
+            return int(input("what's x? "))
+        except ValueError:
+            pass
+            
+[pass just continues the loop from the top?]
