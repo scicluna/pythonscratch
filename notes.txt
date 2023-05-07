@@ -293,4 +293,22 @@ from sayings import hello [will run entire file sayings and look to import hello
 if len(sys.argv) == 2:
     hello(sys.argv[1])
 
+UNIT TESTS.##########################################################
+assert [asserts something is true. if wrong, you see an error]
 
+def test_square():
+    assert square(2) == 4
+    assert square(3) == 9
+
+pytest package [like jest i guess]
+
+--in cmdline
+python -m pytest test_calculator.py
+
+def test_str():
+    with pytest.raises(TypeError):
+        square("cat")
+
+-----------------------------------------
+Make your own pacakges with __init__.py
+$ python -m pytest test [runs the whole folder test if test has __init__.py in it]
