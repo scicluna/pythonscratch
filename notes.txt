@@ -180,3 +180,117 @@ def getInt():
             pass
             
 [pass just continues the loop from the top?]
+
+MODULES.##############################################
+import random
+random.choice([1,2,3,4,5])
+
+--from
+(from random import choice)[to only import random.choice]
+choice([1,2,3,4,5])
+
+random.randint(a,b) -> random number between a and b (cool)
+random.shuffle(x) -> takes in a list of values and randomly sorts them in place
+
+-------------------
+import statistics
+
+statistics.mean([100, 90]) -> finds the mean (cool)
+
+--------------------
+import sys
+
+sys.argv -> list of words typed after python command (like nodejs) 
+print("hello, my name is ", sys.argv[1]) -> zzz... sys.argv[0] is the file call so it starts at [1] for the args
+
+--sys guarding
+
+if len(sys.argv) > 1:
+    print("hello, my name is ", sys.argv[1])
+
+--sys.exit
+
+if len(sys.argv) < 2:
+    sys.exit("Too few arugments") [intentional early exit whole program.]
+
+print("hello, my name is", sys.argv[1])
+
+--slice of a list
+sys.argv[1:] [range 1 til ...everything else (mad cool tbh)]
+for arg in sys.argv[1:]:
+    print("hello, my name is", arg)
+
+argv[1:-1] -> 1 to 1 from the end... epic
+
+-----------------------------------------
+PACKAGES
+
+pyPI (python package index)
+pip (like npm)
+
+pip install cowsay (to get cowsay package)
+if len(sys.argv) == 2:
+    cowsay.cow("hello, " + sys.argv[1]) [lol]
+
+---------------------------------------------
+APIs
+
+requests package
+pip install requests
+
+import requests
+import sys
+
+if len(sys.argv) != 2:
+    sys.exit("no")
+
+response = requests.get(
+    "https://itunes.apple.com/search?entity=song&limit=1&term=" + sys.argv[1])
+print(response.json())
+
+[Very nice. Appears to be synchronus (blocks code below it) automatically]
+
+----------------------------------------------------------
+import json
+import requests
+import sys
+
+if len(sys.argv) != 2:
+    sys.exit("no")
+
+response = requests.get(
+    "https://itunes.apple.com/search?entity=song&limit=1&term=" + sys.argv[1])
+print(json.dumps(response.json(), indent=2))
+o = response.json()
+
+for result in o["results"]:
+    print(result["trackName"])
+
+[this json.dumps indent=2 formats the json in the command line]
+
+-----------------------------------
+module imports
+
+def main():
+    hello("world")
+    goodbye("world")
+
+
+def hello(name):
+    print(f"hello, {name}")
+
+
+def goodbye(name):
+    print(f"goodbye, {name}")
+
+
+if __name__ == "__main__": [this bizzare if, basically says: (if this is the main file, run main, if imported, don't.)]
+    main()
+
+import sys
+from sayings import hello [will run entire file sayings and look to import hello]
+
+if len(sys.argv) == 2:
+    hello(sys.argv[1])
+
+
