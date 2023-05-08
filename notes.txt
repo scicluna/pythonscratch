@@ -442,4 +442,160 @@ with open("student.csv", "a") as file:
     writer = csv.DictWriter(file, fieldnames=["name", "home"]) [just make sure to state the headers]
     writer.DictWriter({"name": name, "home", home}) [write the dicts to the file...]
 
-    
+##################################
+REGEX#############################
+##################################
+
+email = input("What's your email? ").strip()
+
+if "@" in email: 
+    print("Valid")
+else:
+    print("Invalid")
+
+if blank in string automatically checks for truth [like .includes in js]
+if @ appears in the string email, its valid here.
+this sucks though.
+
+---
+if "@" and "." in email:
+    print("Valid")
+else 
+    print("Invalid")
+
+A little better, can use and to expand our expectations.
+
+---
+email = input("What's your email? ").strip()
+
+username, domain = email.split("@")
+
+if (username) and ("." in domain):
+    print("Valid")
+else:
+    print("Invalid")
+[way better already. two bools with an and mean both must be true]
+
+---
+email = input("What's your email? ").strip()
+
+username, domain = email.split("@")
+
+if (username) and ("." in domain) and (domain.endswith(".edu")):
+    print("Valid")
+else:
+    print("Invalid")
+[.endswith is self explanatory fortunately - no equiv in JS really]
+
+---------------------------------------
+REGEX library
+import re
+
+re.search(pattern,string, flags=0)
+
+syntax.........................
+. -> any char except newline
+* -> 0 or more reps
++ -> 1 or more reps
+? -> 0 or 1 reps
+{m} -> m reps
+{m,n} -> m-n reps
+\ -> escape symbol (so we can match literal ., *, +, ?, etc...)
+r"" -> indicates raw string passed in exactly as is (always use)
+^ -> the start of the string
+$ -> the end of the string
+[] -> set of characters
+[^] -> complementing the set (which means you can't match any of the chars)
+[a-zA-Z0-9_] -> set of characters all a-z, A-Z, 0-9, and _
+\w -> alphanumeric set
+\W -> not alphanumeric set
+\s -> whitespace set
+\S -> not whitespace set
+\d -> digit set
+\D -> not digit set
+(a|b) -> a or b
+(...) a group
+(?:...) non-capturing group
+
+flags.....................................................
+re.IGNORECASE (ignores upper/lowercase)
+re.MULTILINE (ignores linebreaks)
+re.DOTALL()
+
+import re
+
+email = input("What's your email? ").strip().lower()
+
+if re.search(".+@.+", email):
+    print("valid")
+else:
+    print("invalid")
+
+---
+import re
+
+email = input("What's your email? ").strip().lower() [.lower() is like .toLowerCase()]
+
+if re.search(r"^\w+@\w+\.edu$", email):
+    print("valid")
+else:
+    print("invalid")
+
+---
+import re
+
+email = input("What's your email? ").strip()
+
+if re.search(r"^(\w|\.)+@(\w\.)?\w+\.edu$", email, re.IGNORECASE):
+    print("valid")
+else:
+    print("invalid")
+
+---
+import re
+
+name = input("What's your name? ").strip()
+
+matches = re.search(r"^(.+), (.+)$", name) -> [matches.groups() returns both "captured" groups in the parenthesis]
+
+if matches:
+    last, first = matches.groups()
+    name = f"{first}, {last}"
+print(f"hello {name}")
+
+WALRUS OPERATOR.###################################
+:=
+Basically decalres a variable and runs an if on the same line
+import re
+
+name = input("What's your name? ").strip()
+
+if matches := re.search(r"^(.+), *(.+)$", name): --> [kind of sick. if matches... and matches = this... assign and ask bool]
+    last, first = matches.groups()
+    name = f"{first} {last}"
+
+
+print(f"hello {name}")
+
+---
+naive
+username = url.replace("https://twitter.com/", "")
+print(username)
+[find/replace]
+
+---
+# still naive
+# username = url.removeprefix("https://twitter.com/")
+# print(f"Username: {username}")
+
+---
+# re solution
+username = re.sub("^.*(com/)", "", url)
+print(username)
+
+---
+BEST solution
+# more specific is better
+if matches := re.search(r"^(?:https?://)?(?:www\.)?twitter\.com/([\w_]+)$", url, re.IGNORECASE):
+    username = matches.group(1)
+    print(f"Username: {username}")
