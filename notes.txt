@@ -599,3 +599,181 @@ BEST solution
 if matches := re.search(r"^(?:https?://)?(?:www\.)?twitter\.com/([\w_]+)$", url, re.IGNORECASE):
     username = matches.group(1)
     print(f"Username: {username}")
+
+######################################################
+#######################################################
+OOP
+######################################################
+#######################################################
+TUPPLE EXAMPLE
+(returning name and house from a function is a pythonism and is called a tupple)
+(tupples are immutable and you cannot reassign them)
+
+def main():
+    name, house = get_student() ##Can also do student = get_student and then use student[0] and student[1]
+    print(f"{name} from {house}")
+
+
+def get_student():
+    name = "Harry"
+    house = "Griff"
+    return (name, house)
+
+
+main()
+
+-------------------
+can mutate dictionaries with student["name"] == "whatever" (obviously dicts are mutable like in JS)
+
+-------------------
+CLASSES
+-------------------
+invent your own "data types" and give them a name [... can be used as a placeholder (cool)]
+
+classes create objects (they use dot notation like in JS unlike dicts) 
+[objects are mutable, but can be made immutable]
+
+[object attributes are "instanced" variables (attributes = props in JS)]
+
+classes have methods (like in JS)
+
+def __init__(self, param, param): -> [This is the pythonism for a constructor] (self = this in JS,)
+[Must use self, and then other arguments in constructor]
+
+---
+class Student:
+    def __init__(self, name, house):
+        self.name = name  -> [creates new "attribute" called name on the student object]
+        self.house = house
+
+---
+if not name: -> This is like in JS if !name
+
+---
+raise -> [create your own exceptions/error messages]
+if not name:
+    raise ValueError
+
+if house not in ["Griff", "Huff", "Raven", "Slith"]:
+    raise ValueError("Invalid house")
+
+---
+def __init__(self, name, house=None) -> [house is optional in the constructor now and defaults to None]
+
+---
+def __str__(self): -> [method that runs whenever it tries to display the raw object (like a getter?)]
+
+---
+custom methods
+
+def charm(self):
+    match self.patronus:
+        case "Stag":
+            return whatever
+
+            ...etc....
+
+---
+CLASS EXAMPLE TIL NOW -> [very much similar to JS classes. Just need to add (self) to all methods]
+class Student:
+    def __init__(self, name, house, patronus):
+
+        if not name:
+            raise ValueError("Missing name")
+
+        if house not in ["Griff", "Huff", "Raven", "Slith"]:
+            raise ValueError("Invalid house")
+
+        self.name = name
+        self.house = house
+        self.patronus = patronus
+
+    def __str__(self):
+        return f"{self.name} from {self.house}"
+
+    def charm(self):
+        return f"EXPECTO {self.patronus}!"
+
+
+def main():
+    student = get_student()
+    print(student)
+    print(student.charm())
+
+
+def get_student():
+    name = "Harry"  # these could be user inputs or whatever
+    house = "Griff"
+    patronus = "Stag"
+    return Student(name, house, patronus)
+
+
+if __name__ == "__main__":
+    main()
+
+---
+PROPERTIES.###############################
+An attribute that we have more control over
+@property -> [decorators (functions that modifier other functions)]
+[@property ]
+
+@property decorator above a def decalres it as a getter
+@house.setter [or whatever the attribute is called] declares it as a setter
+
+---
+Getters/Setters
+
+    #Getter
+    @property
+    def house(self):
+        return self._house
+
+    #Setter -- magically calls a setter whenever someone tries to reassign student.house
+    @house.setter
+    def house(self, house):
+        if house not in ["Griff", "Huffle", "Raven", "Slyth"]
+            raise ValueError("Invalid House")
+        self._house = house
+
+[Property is _.house and attribute is .house] -> Its apparently called a private variable and is used to control waht house should be
+Seperate internal storage of "house attribute" from the public-facing interface. _house is used for internal storage while
+house is used as a public interface for accessing and modifying the house attribute.
+
+basically, the getter/setter creates an interface with the house attribute.
+
+In summary, a property is a special kind of attribute that allows you to define methods for controlling access and modification of an 
+attribute's value. A variable is a named storage location for holding values, and an attribute is a named value or function associated 
+with an object or a class. In the given example, the house property is used as the public-facing interface for the house attribute, 
+and the _house variable is used for internal storage.
+
+---
+class Student:
+    def __init__(self, name, house):
+        self.name = name
+        self.house = house
+
+    def __str__(self):
+        return f"{self.name} from {self.house}"
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        if not name:
+            raise ValueError("Missing name")
+        self._name = name
+
+    @property
+    def house(self):
+        return self._house
+
+    @house.setter
+    def house(self, house):
+        if house not in ["Griff", "Huff", "Raven", "Slith"]:
+            raise ValueError("Invalid house")
+        self._house = house
+
+---
+print(type(50)) -> [shows you the object type of 50. <class 'int>]
