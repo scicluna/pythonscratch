@@ -856,3 +856,337 @@ print(weasley)
 print(potter + weasley)
 
 ---
+############################################################################################
+ET CETERA##################################################################################
+############################################################################################
+
+Sets -> [like in JS]
+
+---
+#Manual implementation of set
+students = [
+    {"name": "Dude", "house": "cool"},
+    {"name": "Bro", "house": "woah"},
+    {"name": "Man", "house": "woah"},
+    {"name": "Luke", "house": "apartment"},
+]
+
+houses = []
+
+for student in students:
+    if student["house"] not in houses:
+        houses.append(student["house"])
+
+for house in sorted(houses):
+    print(house)
+
+---
+#Better implementation of set
+
+students = [
+    {"name": "Dude", "house": "cool"},
+    {"name": "Bro", "house": "woah"},
+    {"name": "Man", "house": "woah"},
+    {"name": "Luke", "house": "apartment"},
+]
+
+houses = set()
+
+for student in students:
+    houses.add(student["house"])
+
+for house in sorted(houses):
+    print(house)
+
+[Just like in JS, where set automatically only returns one of each type]
+---
+
+Global Variables -> [not as good as in JS. Some additional rules]
+[If you declare a variable before hand... as a global, you need to use the keyword global]
+
+ex.
+
+balance = 0
+
+
+def main():
+    print("Balance: ", balance)
+    deposit(100)
+    withdraw(50)
+    print("Balance: ", balance)
+
+
+def deposit(num):
+    global balance -> [adding "global" before balance makes it so python doesn't suck]
+    balance += num
+
+
+def withdraw(num):
+    global balance
+    balance -= num
+
+
+if __name__ == "__main__":
+    main()
+
+[Real solution: OOP it. ROFL]
+--- OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+
+class Account:
+    def __init__(self):
+        self._balance = 0
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def deposit(self, n):
+        self._balance += n
+
+    def withdraw(self, n):
+        self._balance -= n
+
+
+def main():
+    account = Account()
+    print(f"Balance: {account.balance}")
+    account.deposit(100)
+    account.withdraw(50)
+    print(f"Balance: {account.balance}")
+
+
+if __name__ == "__main__":
+    main()
+
+---
+CONSTANTS.##############################################################################
+[no real constants rofl]
+
+MEOWS = 3
+
+for _ in range(MEOWS):
+    print("meow")
+
+[just pythonic convention -- we can totes mutate meows though or reassign it. but its "honor system" so you can fuck up still]
+
+---CLASS SOLUTION OOOOOP
+class Cat:
+    MEOWS = 3
+
+    def meow(self):
+        for _ in range(Cat.MEOWS):
+            print("meow")
+
+
+cat = Cat()
+cat.meow()
+
+---
+TYPE HINTS.###############################################################################
+
+pip install mypy
+python -m mypy meows2.py -> [run it with the type checker (kind of cool)]
+
+def meow(n: int) -> None:
+    for _ in range(n):
+        print("meow")
+
+meow("hi")
+
+[sort of like TS]
+
+def meow(n: int) -> str:       -> [kind of cool, its like TS. just (argument: type) -> type [return type]]
+    return "meow\n" * n
+
+
+number: int = 5
+meows: str = meow(number)
+print(meows, end="")
+
+---
+DOC STRINGS.###############################################################################
+
+def meow(n: int) -> str:
+    """Meow n times."""
+    return "meow\n" * n
+
+(adds Meow n times into the intellisense scrollover in vscode (pretty cool))
+
+"""
+Meow n times.
+:param n: Number of times to meow
+:type n: int
+:raise TypeError: If n is not an int
+:return: A string of n meows, one per line
+:rtype: str
+"""
+
+[pretty nice tbh. Idk how to do this in JS]
+
+---
+ARGPARSE.###################################################################################
+
+import argparse
+
+parser = argparse.ArgumentParser(description="Meow like a cat")
+parser.add_argument("-n", default=1, help="number of times to meow", type=int)
+args = parser.parse_args()
+
+for _ in range(args.n):
+    print("meow")
+
+[kind of cool for cli apps. Going to have to read up on argparse if i want to use it though.]
+
+---
+UNPACKING.#####################################################################################
+
+[Unpacking is sick. It's kind of like the spread operator]
+
+def total(galleons, sickles, knuts):
+    return (galleons * 17 + sickles) * 29 + knuts
+
+
+coins = [100, 50, 25]
+
+print(total(*coins), "Knuts")
+
+[just use *array and it passes it in as 3 seperate args]
+
+def total(galleons, sickles, knuts):
+    return (galleons * 17 + sickles) * 29 + knuts
+
+
+coins = {"galleons": 100, "sickles": 50, "knuts": 25}
+
+print(total(**coins), "Knuts")
+
+[for dicts, use ** (siiickkk)]
+
+*args, **kwargs.#############################################################################
+
+def f(*args, **kwargs):  # any number of args as a tupple/list, and any number of key word args as a dictionary
+    print("Named:", kwargs)
+
+
+f(100, 50, 25, galleons=100, sickles=50, knuts=25) -> {"galleons":100, "sickles"=50, "knuts"=25}
+
+MAPS.#######################################################################################
+
+without map
+def main():
+    yell("This", "is", "CS50")
+
+
+def yell(*words):
+    uppercased = []
+    for word in words:
+        uppercased.append(word.upper())
+    print(*uppercased)
+
+
+if __name__ == "__main__":
+    main()
+
+---
+with map
+
+def yell(*words):
+    uppercased = map(str.upper, words)
+    print(*uppercased)
+
+[different syntax than JS. js would be words.map(word => word.toUpperCase())]
+[this one uses map as a function -> map(function, list to apply function to)]
+
+LIST COMPREHENSIONS.#######################################################################
+
+def yell(*words):
+    uppercased = [word.upper() for word in words]
+    print(*uppercased)
+
+[fucking woah. word.upper() for word in words... Its kind of cool af. swag. -> Wow. idk how to compare this to JS. New idea]
+
+---
+students = [
+    {"name": "Harry", "house": "Griff"},
+    {"name": "Ron", "house": "Griff"},
+    {"name": "Draco", "house": "Slith"}
+]
+
+griffs = {
+    student["name"] for student in students if student["house"] == "Griff"
+}
+
+for griff in sorted(griffs):
+    print(griff)
+
+[wtf -> I guess its like -> thing for variable in list if bool]
+
+---FILTERING
+
+students = [
+    {"name": "Harry", "house": "Griff"},
+    {"name": "Ron", "house": "Griff"},
+    {"name": "Draco", "house": "Slith"}
+]
+
+
+def is_griff(student):
+    return student["house"] == "Griff"
+
+
+griffs = filter(is_griff, students)
+
+for griff in griffs:
+    print(griff["name"])
+
+[sick filter, like python map, you pass it a function and then the list]
+
+---------------USE ANONYMOUS Functions
+students = [
+    {"name": "Harry", "house": "Griff"},
+    {"name": "Ron", "house": "Griff"},
+    {"name": "Draco", "house": "Slith"}
+]
+
+griffs = filter(lambda student: student["house"] == "Griff", students)
+
+for griff in griffs:
+    print(griff["name"])
+
+griffs = [{"name": student, "house": "Griff"} for student in students]
+
+[List comprehension is sick. This is basically a JS map returning an object for each student in students]
+
+DICTIONARY COMPREHENSION.##########################################################################
+students = ["Hermoine", "Harry", "Ron"]
+
+griffs = {student: "Griff" for student in students}
+
+print(griffs)
+[Baller. outputs {'Hermoine': 'Griff', 'Harry': 'Griff', 'Ron': 'Griff'}]
+
+ENUMERATE.##########################################################################################
+students = ["Hermoine", "Harry", "Ron"]
+
+for i, student in enumerate(students):
+    print(i + 1, student)
+
+[idk, kind of cool i guess, idk when i would use this. numbered lists?]
+
+GENERATORS.#########################################################################################
+
+def main():
+    n = int(input("What's n?"))
+    for s in sheep(n):
+        print(s)
+
+
+def sheep(n):
+    for i in range(n):
+        yield "bah" * i
+
+
+if __name__ == "__main__":
+    main()
+
+[yield is bizzare. it returns a little data at a time... i dont get it tbh --- its async i guess]
