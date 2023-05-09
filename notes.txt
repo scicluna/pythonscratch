@@ -777,3 +777,82 @@ class Student:
 
 ---
 print(type(50)) -> [shows you the object type of 50. <class 'int>]
+
+#############################################################################
+MORE OOP.####################################################################
+#############################################################################
+class methods -> [want to be associated with the class itself and not the object of the class]
+@classmethod 
+
+non object-classes (aka, i don't need multiple sorting hats)
+
+class Hat:
+
+    houses = ["Griff", "Huff", "Raven", "Slith"]  # "class" variable
+
+    @classmethod
+    def sort(cls, name):
+        house = random.choice(cls.houses)
+        print(f"{name} is in {house}")
+
+Hat.sort("Harry")
+[very jank. no equiv in JS. class methods... objectless classes... huh.
+Like a container for functions I guess.]
+
+---
+class Student:
+    def __init__(self, name, house):
+        self.name = name
+        self.house = house
+
+    def __str__(self):
+        return f"{self.name} from {self.house}"
+
+    @classmethod
+    def get(cls):
+        name = "Harry"  # imagine this is an input
+        house = "Griff"
+        return cls(name, house)
+
+
+def main():
+    student = Student.get()
+    print(student)
+
+
+if __name__ == "__main__":
+    main()
+
+---
+inheritance in python -> 
+class Student(Wizard): -> [this syntax is equiv to JS class Student extends Wizard]
+    def __init__(self, name, house):
+        super().__init__(name) -> [the super constructor]
+        self.house = house
+
+---
+OPERATOR OVERLOADING.##########################################
+
+overload + example....
+class Vault:
+    def __init__(self, galleons=0, sickles=0, knuts=0):
+        self.galleons = galleons
+        self.sickles = sickles
+        self.knuts = knuts
+
+    def __str__(self):
+        return f"{self.galleons} g, {self.sickles} s, {self.knuts} k"
+
+    def __add__(self, other):
+        return f"{self.galleons + other.galleons} g, {self.sickles + other.sickles} s, {self.knuts + other.knuts} k"
+
+
+potter = Vault(100, 50, 25)
+print(potter)
+
+weasley = Vault(25, 50, 100)
+print(weasley)
+
+print(potter + weasley)
+
+---
